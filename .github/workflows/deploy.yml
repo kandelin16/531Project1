@@ -1,0 +1,37 @@
+name: Deploy To EB
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0"
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: |
+          cd 531Project1
+          dotnet build --configuration Release --no-restore
+          dotnet publish --output "../dotnet-webapp" --configuration "Debug" --framework "net6.0" -r linux-x64 --self-contained false
+      - name: Zip Build Files
+        run: |
+          cd dotnet-webapp
+          zip -r ../deploy.zip .
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: 531project1
+          environment_name: 531project1-env
+          region: us-east-1
+          version_label: ${{ github.run_number }}
+          deployment_package: deploy.zip
