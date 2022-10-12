@@ -1,4 +1,14 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using _531Project1.Models;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// add db string
+var connectionString = builder.Configuration.GetConnectionString("ScottDBConnection");
+builder.Services.AddDbContext<ScottDbContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -16,6 +26,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+
+
 
 app.UseRouting();
 
