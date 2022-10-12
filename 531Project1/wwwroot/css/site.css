@@ -32,7 +32,7 @@ body {
 h1.heading {
     color: #fff;
     font-size: 1.15em;
-    font-weight: 900;
+    font-weight: bolder;
     margin: 0 0 0.5em;
     color: #505050;
 }
@@ -112,3 +112,23 @@ h1.heading {
         font-weight: 600;
         text-transform: uppercase
     }
+
+.title_custom {
+    /*font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;*/
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 700;
+    font-size: 3.65em;
+    
+}
+
+.head_font {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 300;
+ 
+    
+}
+
+.bg-color {
+    background-image: linear-gradient(to right, #D20A0A, yellow);
+}
+
