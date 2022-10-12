@@ -11,13 +11,15 @@ public class HomeController : Controller
 
 
 
-    public IQueryable<Scott> Scotts => context.Scott;
+    public IQueryable<Scott> Scotts => context.michael;
 
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ScottDbContext context)
     {
-        _logger = logger;
+
+        context = context;
+
     }
 
     public IActionResult Index()

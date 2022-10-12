@@ -9,7 +9,7 @@ namespace _531Project1.Models
 
         }
 
-        public DbSet<Scott> Scott { get; set; }
+        public DbSet<Scott> michael { get; set; }
 
     }
 }
