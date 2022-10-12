@@ -6,6 +6,13 @@ namespace _531Project1.Controllers;
 
 public class HomeController : Controller
 {
+    private ScottDbContext context { get; set; }
+
+
+
+
+    public IQueryable<Scott> Scotts => context.Scott;
+
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
@@ -15,6 +22,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+
+        var test = Scotts.ToList();
         return View();
     }
 
