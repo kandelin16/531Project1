@@ -6,24 +6,21 @@ namespace _531Project1.Controllers;
 
 public class HomeController : Controller
 {
-    private ScottDbContext context { get; set; }
-
-
-
-
-    public IQueryable<Scott> Scotts => context.Scott;
-
+    private ScottDbContext _context { get; set; }
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ScottDbContext c)
     {
         _logger = logger;
+        _context = c;
     }
+
+    public IQueryable<Scott> Scotts => _context.michael;
 
     public IActionResult Index()
     {
 
-        var test = Scotts.ToList();
+        ViewBag.test = Scotts.ToList();
         return View();
     }
 

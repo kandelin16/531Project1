@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // add db string
-var connectionString = builder.Configuration.GetConnectionString("ScottDBConnection");
+var connectionString = builder.Configuration.GetConnectionString("DbConnection");
 builder.Services.AddDbContext<ScottDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
