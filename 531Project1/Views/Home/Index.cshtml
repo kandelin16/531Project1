@@ -5,9 +5,42 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to the Project 1 Site</h1>
     <p>Second Pipeline Test</p>
-    @foreach (var mike in ViewBag.test)
-    {
-        <img src="@mike.PictureUrl"></img>
-    }
+    
 </div>
 
+<section class="wrapper">
+    <div class="container-fostrap">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    @foreach (var mike in ViewBag.test)
+                    {
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                                <a class="img-card" href="https://en.wikipedia.org/wiki/Michael_Scott_(The_Office)">
+                                    <img style="height:100%" src="@mike.PictureUrl" />
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                        <a href="https://en.wikipedia.org/wiki/Michael_Scott_(The_Office)">
+                                       Michael Scott
+                                    </a>
+                                </h4>
+                                <p class="">
+                                        Picture @mike.Title of him
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                    <a href="https://en.wikipedia.org/wiki/Michael_Scott_(The_Office)" class="btn btn-link btn-block">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
