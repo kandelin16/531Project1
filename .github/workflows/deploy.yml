@@ -24,17 +24,17 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/staging.pem
-          chmod 600 ~/.ssh/staging.pem
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
           Host env
             HostName 3.15.26.213
             User ec2-user
-            IdentityFile ~/.ssh/staging.pem
+            IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
         env:
-          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Upload New Files into EC2
         run: |
           scp dotnet-webapp/* env:/projectOne
