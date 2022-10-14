@@ -20,7 +20,7 @@ jobs:
         run: |
           cd 531Project1
           dotnet build --configuration Release --no-restore
-          dotnet publish --output "../dotnet-webapp" --configuration "Debug" --framework "net6.0" -r linux-x64 --self-contained false
+          dotnet publish --output "../dotnet-webapp" --configuration "Release"
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
