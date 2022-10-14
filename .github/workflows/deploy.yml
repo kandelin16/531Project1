@@ -37,7 +37,7 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Upload New Files into EC2
         run: |
-          scp dotnet-webapp/* env:/projectOne
+          scp dotnet-webapp/* env:~/projectOne
       - name: Restart the Service
         run: |
           ssh env 'sudo systemctl start aDotNet'
