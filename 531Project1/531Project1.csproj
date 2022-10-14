@@ -25,9 +25,6 @@
     <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\img\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Content Remove="appsettings.json" />
   </ItemGroup>
 </Project>
