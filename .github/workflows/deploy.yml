@@ -27,11 +27,17 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
+          Host env
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
         env:
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
       - name: Upload New Files into EC2
         run: |
-          scp -i ~/.ssh/staging.key -r cd dotnet-webapp/* ec2-user@3.15.26.213:~/projectOne
+          scp dotnet-webapp/* env:/projectOne
       - name: Restart the Service
         run: |
-          ssh -i ~/.ssh/staging.key ec2-user@3.15.26.213 'sudo systemctl DotNet'
+          ssh env 'sudo systemctl start DotNet'
