@@ -25,9 +25,13 @@
     <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\img\" />
+    <Content Remove="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <None Include="wwwroot\css\site.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

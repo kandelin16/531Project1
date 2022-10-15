@@ -1,4 +1,4 @@
-name: Deploy To EB
+name: Deploy To EC2
 
 on:
   push:
@@ -20,18 +20,24 @@ jobs:
         run: |
           cd 531Project1
           dotnet build --configuration Release --no-restore
-          dotnet publish --output "../dotnet-webapp" --configuration "Debug" --framework "net6.0" -r linux-x64 --self-contained false
-      - name: Zip Build Files
+          dotnet publish --output "../dotnet-webapp" --configuration "Release"
+      - name: Configure SSH
         run: |
-          cd dotnet-webapp
-          zip -r ../deploy.zip .
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v20
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: 531project1
-          environment_name: 531project1-env
-          region: us-east-1
-          version_label: ${{ github.run_number }}
-          deployment_package: deploy.zip
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host env
+            HostName 3.15.26.213
+            User ec2-user
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+      - name: Upload New Files into EC2
+        run: |
+          scp -r dotnet-webapp/* env:~/projectOne
+      - name: Restart the Service
+        run: |
+          ssh env 'sudo systemctl restart DotNet.service'

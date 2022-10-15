@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // add db string
-var connectionString = builder.Configuration.GetConnectionString("DbConnection");
+var connectionString = "server=project1database.cluster-coajlaor5d3r.us-east-2.rds.amazonaws.com;database=project1;port=3306;username=friendsDB;password=jDUNyv7U(m)lGM$";
 builder.Services.AddDbContext<ScottDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-//app.Urls.Add("http://*:80");
+app.Urls.Add("http://*:80");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
